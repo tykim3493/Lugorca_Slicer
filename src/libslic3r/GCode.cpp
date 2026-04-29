@@ -5154,7 +5154,7 @@ LayerResult GCode::process_layer(
                 m_layer = layer_to_print.layer();
                 m_object_layer_over_raft = object_layer_over_raft;
                 if (m_config.reduce_crossing_wall)
-                    m_avoid_crossing_perimeters.init_layer(*m_layer, m_config.avoid_crossing_wall_offset.value);
+                    m_avoid_crossing_perimeters.init_layer(*m_layer);
 
                 if (this->config().gcode_label_objects) {
                     gcode += std::string("; printing object ") + instance_to_print.print_object.model_object()->name +

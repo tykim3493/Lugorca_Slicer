@@ -870,15 +870,12 @@ void PrintConfigDef::init_fff_params()
     def->mode = comAdvanced;
     def->set_default_value(new ConfigOptionFloatOrPercent(0., false));
 
-    def = this->add("avoid_crossing_wall_offset", coFloat);
-    def->label = L("Avoid crossing walls - Offset");
+    def = this->add("avoid_crossing_wall_includes_support", coBool);
+    def->label = L("Avoid crossing walls - include supports");
     def->category = L("Quality");
-    def->tooltip = L("");
-    def->sidetext = L("mm");
-    def->min = 0;
-    def->max = 10;
+    def->tooltip = L("When enabled, the avoid crossing walls feature will also avoid crossing support structures.");
     def->mode = comAdvanced;
-    def->set_default_value(new ConfigOptionFloat(0.));
+    def->set_default_value(new ConfigOptionBool(false));
 
     // BBS
     def = this->add("supertack_plate_temp", coInts);
