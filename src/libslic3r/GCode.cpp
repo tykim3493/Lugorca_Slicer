@@ -7471,22 +7471,6 @@ std::string GCode::travel_to(const Point& point, ExtrusionRole role, std::string
         //BBS: don't generate detour travel paths when current position is unclea
     {
         travel = m_avoid_crossing_perimeters.travel_to(*this, point, &could_be_wipe_disabled);
-        // LUGOWARE: ACP offset — project intermediate points onto per-lslice adaptive inner line
-        {
-            const auto& od = m_avoid_crossing_perimeters.offset_data();
-            if (!od.empty() && travel.size() > 2 && m_layer != nullptr) {
-                for (size_t i = 1; i + 1 < travel.size(); ++i) {
-                    Point& pt = travel.points[i];
-                    int li = -1;
-                    for (int j = 0; j < (int)m_layer->lslices.size(); ++j)
-                        if (m_layer->lslices[j].contour.contains(pt)) { li = j; break; }
-                    if (li < 0 || li >= (int)od.size() || od[li].inner_line.empty()) continue;
-                    Point p = projection_onto(od[li].inner_line, pt);
-                    double max_d = scale_(od[li].actual_offset * 1.5);
-                    if ((p - pt).cast<double>().norm() <= max_d) pt = p;
-                }
-            }
-        }
         // check again whether the new travel path still needs a retraction
         needs_retraction = this->needs_retraction(travel, role, lift_type);
         //if (needs_retraction && m_layer_index > 1) exit(0);
