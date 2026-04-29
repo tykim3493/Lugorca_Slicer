@@ -36,7 +36,7 @@ if (SLIC3R_GUI)
             find_package(wxWidgets 3.1 REQUIRED COMPONENTS base core adv html gl aui net media webview)
         endif ()
     else ()
-        find_package(wxWidgets 3.1 REQUIRED COMPONENTS html adv gl core base webview aui net media)
+        find_package(wxWidgets 3.1 CONFIG REQUIRED COMPONENTS html adv gl core base webview aui net media)
     endif ()
 
     if(UNIX)
