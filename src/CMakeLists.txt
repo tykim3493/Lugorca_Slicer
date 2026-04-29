@@ -43,7 +43,9 @@ if (SLIC3R_GUI)
         message(STATUS "wx-config path: ${wxWidgets_CONFIG_EXECUTABLE}")
     endif()
 
-    include(${wxWidgets_USE_FILE})
+    if(wxWidgets_USE_FILE)
+        include(${wxWidgets_USE_FILE})
+    endif()
 
     find_package(JPEG QUIET)
 
